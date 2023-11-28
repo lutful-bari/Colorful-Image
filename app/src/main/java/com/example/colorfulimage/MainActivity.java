@@ -72,6 +72,24 @@ public class MainActivity extends AppCompatActivity{
         binding.seekRed.setOnSeekBarChangeListener(colorizationHandler);
         binding.seekGreen.setOnSeekBarChangeListener(colorizationHandler);
         binding.seekBlue.setOnSeekBarChangeListener(colorizationHandler);
+        binding.savePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int permissionCheck = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                if (permissionCheck == PackageManager.PERMISSION_GRANTED){
+                    try {
+                        SaveFile.saveFile(MainActivity.this, bitmap);
+                        Toast.makeText(MainActivity.this, "Saved",Toast.LENGTH_SHORT).show();
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            200);
+                }
+            }
+        });
     }
 
     private class ColorizationHandler implements SeekBar.OnSeekBarChangeListener {

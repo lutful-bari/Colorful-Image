@@ -61,7 +61,7 @@ public class Colorful {
                         (int)redColorValue * Color.red(pixelColor),
                         (int) greenColorValue * Color.green(pixelColor),
                         (int) blueColorValue * Color.blue(pixelColor));
-                myBitmap.setPixel(bitmapWidth, bitmapHeight, pixelColor);
+                myBitmap.setPixel(row, colum, pixelColor);
             }
         }
         return myBitmap;
